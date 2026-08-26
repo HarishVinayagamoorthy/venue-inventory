@@ -173,6 +173,9 @@ export class PaymentService {
             status: booking.status
           }
         };
+      }, {
+        timeout: 15000,
+        maxWait: 5000
       });
     } catch (error: any) {
       if (error.message === 'ALREADY_CONVERTED' || (error.code === 'P2002' && error.meta?.target?.includes('idempotencyKey'))) {
