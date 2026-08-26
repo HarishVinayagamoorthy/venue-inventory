@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "npm run dev --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=packages/shared-types && npm run build --workspace=packages/shared-validation && npm run build --workspace=apps/api && npm run build --workspace=apps/web",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "start:infra": "docker compose up -d",
