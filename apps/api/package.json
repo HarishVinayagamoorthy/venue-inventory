@@ -19,6 +19,9 @@
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.11.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.11.30",
     "bcrypt": "^5.1.1",
     "bullmq": "^5.7.8",
     "dotenv": "^16.4.5",
@@ -30,9 +33,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.6",
-    "@types/node": "^20.11.30",
     "@types/supertest": "^7.2.1",
     "prisma": "^5.11.0",
     "supertest": "^7.2.2",
