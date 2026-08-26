@@ -13,11 +13,12 @@ const envSchema = z.object({
   CORS_ORIGIN: z.string().url()
 });
 
-const parsed = envSchema.safeParse(process.env);
-
-if (!parsed.success) {
-  console.error('Invalid environment variables:', parsed.error.format());
+let parsed: z.infer<typeof envSchema>;
+try {
+  parsed = envSchema.parse(process.env);
+} catch (error: any) {
+  console.error('Invalid environment variables:', error.format ? error.format() : error);
   process.exit(1);
 }
 
-export const env = parsed.data;
+export const env = parsed;

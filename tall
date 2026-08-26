@@ -1,0 +1,68 @@
+warning: in the working copy of 'apps/api/src/config/env.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'apps/api/tsconfig.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/apps/api/src/config/env.ts b/apps/api/src/config/env.ts[m
+[1mindex bbb2a7f..35b8268 100644[m
+[1m--- a/apps/api/src/config/env.ts[m
+[1m+++ b/apps/api/src/config/env.ts[m
+[36m@@ -13,11 +13,12 @@[m [mconst envSchema = z.object({[m
+   CORS_ORIGIN: z.string().url()[m
+ });[m
+ [m
+[31m-const parsed = envSchema.safeParse(process.env);[m
+[31m-[m
+[31m-if (!parsed.success) {[m
+[31m-  console.error('Invalid environment variables:', parsed.error.format());[m
+[32m+[m[32mlet parsed: z.infer<typeof envSchema>;[m
+[32m+[m[32mtry {[m
+[32m+[m[32m  parsed = envSchema.parse(process.env);[m
+[32m+[m[32m} catch (error: any) {[m
+[32m+[m[32m  console.error('Invalid environment variables:', error.format ? error.format() : error);[m
+   process.exit(1);[m
+ }[m
+ [m
+[31m-export const env = parsed.data;[m
+[32m+[m[32mexport const env = parsed;[m
+[1mdiff --git a/apps/api/tsconfig.json b/apps/api/tsconfig.json[m
+[1mindex 6e6cb31..d673e10 100644[m
+[1m--- a/apps/api/tsconfig.json[m
+[1m+++ b/apps/api/tsconfig.json[m
+[36m@@ -8,7 +8,8 @@[m
+     "skipLibCheck": true,[m
+     "forceConsistentCasingInFileNames": true,[m
+     "outDir": "./dist",[m
+[31m-    "rootDir": "./src"[m
+[32m+[m[32m    "rootDir": "./src",[m
+[32m+[m[32m    "types": ["node"][m
+   },[m
+   "include": [[m
+     "src/**/*"[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 796892e..79dfdc7 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -14,6 +14,9 @@[m
+       "devDependencies": {[m
+         "tsx": "^4.0.0",[m
+         "typescript": "5.9.3"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": "20.x"[m
+       }[m
+     },[m
+     "apps/api": {[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex e53b09a..f2fec2f 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -6,6 +6,9 @@[m
+     "apps/*",[m
+     "packages/*"[m
+   ],[m
+[32m+[m[32m  "engines": {[m
+[32m+[m[32m    "node": "20.x"[m
+[32m+[m[32m  },[m
+   "scripts": {[m
+     "dev": "npm run dev --workspaces --if-present",[m
+     "build": "npm run build --workspaces --if-present",[m
