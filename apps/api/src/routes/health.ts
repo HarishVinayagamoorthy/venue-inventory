@@ -7,8 +7,8 @@ export async function healthRoutes(fastify: FastifyInstance) {
 
   fastify.get('/ready', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const { default: prisma } = await import('../plugins/prisma');
-      const { holdExpirationQueue } = await import('../jobs/hold-expiration.queue');
+      const { default: prisma } = (await import('../plugins/prisma.js')) as any;
+      const { holdExpirationQueue } = (await import('../jobs/hold-expiration.queue.js')) as any;
       
       // Check MySQL
       await prisma.$queryRaw`SELECT 1`;
