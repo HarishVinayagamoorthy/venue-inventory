@@ -14,5 +14,9 @@ export const holdsApi = {
   getById: async (id: string): Promise<HoldResponseDTO> => {
     const res = await api.get(`/holds/${id}`);
     return res.data.data;
+  },
+  cancel: async (id: string): Promise<any> => {
+    const res = await api.delete(`/holds/${id}`);
+    return res.data.data;
   }
 };

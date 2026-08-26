@@ -1,6 +1,15 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api/v1';
+let baseURL = import.meta.env.VITE_API_BASE_URL;
+
+if (!baseURL) {
+  if (import.meta.env.PROD) {
+    throw new Error(
+      'VITE_API_BASE_URL is not defined in production environment. Please configure it in your deployment environment.'
+    );
+  }
+  baseURL = 'http://localhost:3001/api/v1';
+}
 
 export const api = axios.create({
   baseURL,
